@@ -6,9 +6,9 @@ int blinkPin = 13;                // pin to blink led at each beat
 #include <Wire.h> // Must include Wire library for I2C
 #include <SparkFun_MMA8452Q.h> // Includes the SFE_MMA8452Q library
 #include <LiquidCrystal.h>
+#include <LiquidCrystal.h>
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
-int select = 0;
 
 const int ALERT_PIN = A3;
 
@@ -66,38 +66,18 @@ void loop(){
  
   delay(1000);  // Wait 1000ms
 
-int buttonValue = 1023;
-buttonValue = analogRead(A0);
-        //Serial.println(buttonValue);
 
-     if (buttonValue > 915 && buttonValue < 949)  // UP button
-    {
-       select ++;
-    }
-
-
+//lcd
+   lcd.clear();
+   lcd.print("Temp: ");
+   lcd.print(temperature);
+   lcd.print(" C");
+   lcd.setCursor(0,1);
+   lcd.print("Heart: ");
+   lcd.print(BPM);
+   lcd.print(" BPM");
    
-   if (select == 1){
-      lcd.clear();
-        lcd.print("Temp: ");
-        lcd.print(temperature);
-        lcd.print(" C");
-        lcd.setCursor(0,1);
-        lcd.print("Haertbeat: ");
-        lcd.print(BPM);
-        lcd.print(" BPM");
-      }
-      if (select == 2){
-      lcd.clear();
-        lcd.print("Haertbeat:");
-        lcd.setCursor(0,1);
-        lcd.print(BPM);
-      
-      }
-
-    
-Serial.print(String("[") + temperature + String("|") + BPM + String("|") + accel.cx + String("|") + accel.cy + String("|") + accel.cz + String("]"));
-  
+   Serial.print(String("[") + temperature + String("|") + BPM + String("|") + accel.cx + String("|") + accel.cy + String("|") + accel.cz + String("]"));
 }
 
 
