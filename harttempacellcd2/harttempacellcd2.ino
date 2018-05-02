@@ -40,13 +40,13 @@ lcd.begin(16, 2);
 }
 
 void loop(){
-  sendDataToProcessing('S', Signal);     // send Processing the raw Pulse Sensor data
+//  sendDataToProcessing('S', Signal);     // send Processing the raw Pulse Sensor data
   
-        sendDataToProcessing('B',BPM);   // send heart rate with a 'B' prefix
-        sendDataToProcessing('Q',IBI);   // send time between beats with a 'Q' prefix
+//        sendDataToProcessing('B',BPM);   // send heart rate with a 'B' prefix
+//      sendDataToProcessing('Q',IBI);   // send time between beats with a 'Q' prefix
         QS = false;                      // reset the Quantified Self flag for next time    
      
-                           //  take a break
+                          //  take a break
   float temperature;
   boolean alertPinState, alertRegisterState;
 
@@ -59,11 +59,11 @@ void loop(){
   if (accel.available())
   {
     accel.read();
-    printCalculatedAccels();
+//    printCalculatedAccels();
   }
-  Serial.print("Temperature: ");
+ /* Serial.print("Temperature: ");
   Serial.println(temperature);
- 
+ */
   delay(1000);  // Wait 1000ms
 
 
@@ -80,12 +80,12 @@ void loop(){
    Serial.print(String("[") + temperature + String("|") + BPM + String("|") + accel.cx + String("|") + accel.cy + String("|") + accel.cz + String("]"));
 }
 
-
+/*
 void sendDataToProcessing(char symbol, int data ){
     Serial.print(symbol);                // symbol prefix tells Processing what type of data is coming
     Serial.println(data);                // the data to send culminating in a carriage return
-  }
-
+  }*/
+/*
 void printCalculatedAccels()
 { 
   Serial.print(accel.cx, 3);
@@ -95,7 +95,7 @@ void printCalculatedAccels()
   Serial.print(accel.cz, 3);
   Serial.println("\t");
 }
-
+*/
 
 
 
