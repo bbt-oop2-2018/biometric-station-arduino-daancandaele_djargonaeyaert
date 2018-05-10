@@ -77,7 +77,7 @@ void loop(){
    lcd.print(BPM);
    lcd.print(" BPM");
    
-   Serial.print(String("[") + temperature + String("|") + BPM + String(",") + accel.cx + String(".") + accel.cy + String(":") + accel.cz + String("]"));
+   Serial.print(String("[") + temperature + String("|") + BPM + String(",") + accel.cx + String(";") + accel.cy + String(":") + accel.cz + String("]"));
 }
 
 /*
