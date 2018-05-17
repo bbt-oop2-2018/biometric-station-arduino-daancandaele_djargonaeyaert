@@ -64,10 +64,12 @@ void loop(){
  /* Serial.print("Temperature: ");
   Serial.println(temperature);
  */
-  delay(1000);  // Wait 1000ms
+delay(1000);
 
 
 //lcd
+int i = 1;
+if (i=1){
    lcd.clear();
    lcd.print("Temp: ");
    lcd.print(temperature);
@@ -76,8 +78,23 @@ void loop(){
    lcd.print("Heart: ");
    lcd.print(BPM);
    lcd.print(" BPM");
-   
+   i++;
+}
+  delay(2000); 
+if (i=2){
+   lcd.clear();
+   lcd.print("X: ");
+   lcd.print(accel.cx);
+   lcd.print(" Y:");
+   lcd.print(accel.cy);
+   lcd.setCursor(0,1);
+   lcd.print("Z: ");
+   lcd.print(accel.cz);
+  i--;
+}  
+  delay(2000);
    Serial.print(String("[") + temperature + String("|") + BPM + String(",") + accel.cx + String(";") + accel.cy + String(":") + accel.cz + String("]"));
+
 }
 
 /*
