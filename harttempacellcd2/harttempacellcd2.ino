@@ -16,7 +16,6 @@ const int ALERT_PIN = A3;
 TMP102 sensor0(0x48); 
 MMA8452Q accel;
 
-// these variables are volatile because they are used during the interrupt service routine!
 volatile int BPM;                   // used to hold the pulse rate
 volatile int Signal;                // holds the incoming raw data
 volatile int IBI = 600;             // holds the time between beats, the Inter-Beat Interval
@@ -40,13 +39,7 @@ lcd.begin(16, 2);
 }
 
 void loop(){
-//  sendDataToProcessing('S', Signal);     // send Processing the raw Pulse Sensor data
-  
-//        sendDataToProcessing('B',BPM);   // send heart rate with a 'B' prefix
-//      sendDataToProcessing('Q',IBI);   // send time between beats with a 'Q' prefix
-        QS = false;                      // reset the Quantified Self flag for next time    
-     
-                          //  take a break
+  QS = false;        
   float temperature;
   boolean alertPinState, alertRegisterState;
 
@@ -59,15 +52,25 @@ void loop(){
   if (accel.available())
   {
     accel.read();
-//    printCalculatedAccels();
   }
- /* Serial.print("Temperature: ");
-  Serial.println(temperature);
- */
+  
 delay(1000);
-
-
-//lcd
+/*
+   lcd.clear();
+   lcd.print("T: ");
+   lcd.print(temperature);
+   
+   lcd.print(" HB: ");
+   lcd.print(BPM);
+   lcd.print(" BPM");
+   lcd.setCursor(0,1);
+   lcd.print("X");
+   lcd.print(accel.cx);
+   lcd.print("Y");
+   lcd.print(accel.cy);
+   lcd.print("Z");
+   lcd.print(accel.cz);
+*/
 int i = 1;
 if (i=1){
    lcd.clear();
@@ -92,27 +95,12 @@ if (i=2){
    lcd.print(accel.cz);
   i--;
 }  
-  delay(2000);
-   Serial.print(String("[") + temperature + String("|") + BPM + String(",") + accel.cx + String(";") + accel.cy + String(":") + accel.cz + String("]"));
-
+   Serial.print(String("[") + temperature + 
+   String("|") + BPM + String(",") +
+   accel.cx + String(";") + accel.cy + 
+   String(":") + accel.cz + String("]"));
 }
 
-/*
-void sendDataToProcessing(char symbol, int data ){
-    Serial.print(symbol);                // symbol prefix tells Processing what type of data is coming
-    Serial.println(data);                // the data to send culminating in a carriage return
-  }*/
-/*
-void printCalculatedAccels()
-{ 
-  Serial.print(accel.cx, 3);
-  Serial.print("\t");
-  Serial.print(accel.cy, 3);
-  Serial.print("\t");
-  Serial.print(accel.cz, 3);
-  Serial.println("\t");
-}
-*/
 
 
 
